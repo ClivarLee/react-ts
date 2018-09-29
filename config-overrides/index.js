@@ -4,6 +4,8 @@ const rewireHappypack = require('./rewire-happypack')
 const { getLoader, compose } = require('react-app-rewired');
 const rewireOutput = require('./rewire-output')
 const rewireClientEnv = require('./rewire-client-env')
+const rewireHotLoader = require('./rewire-hot-loader')
+
 module.exports = {
   webpack (config, env) {
 
@@ -25,6 +27,7 @@ module.exports = {
     }
     
     return compose(
+      rewireHotLoader,
       rewireOutput('dist'),
       rewireClientEnv({
         CLIENT_ENV: process.env.CLIENT_ENV
